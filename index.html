@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+<TITLE>WEB-PING</TITLE>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webping.js"></script>
+</head>
+<table border="0">
+<tr>
+<td><script>renderPingGraphic('Google_3sec', 'https://www.google.com/favicon.ico', 3000, w, h);</script></td>
+<td><script>renderPingGraphic('Google_30sec', '-', 3000*10, w, h, 'Google_3sec');</script></td>
+<td><script>renderPingGraphic('Google_3min', '-', 3000*10*6, w, h, 'Google_30sec');</script></td>
+<td><script>renderPingGraphic('Google_30min', '-', 3000*10*6*10, w, h, 'Google_3min');</script></td>
+</tr>
+<tr>
+<td><script>renderPingGraphic('Maximum_3sec', 'https://maximuma.net/wp-content/uploads/2018/10/logofooter1.png', 3000, w, h);</script></td>
+<td><script>renderPingGraphic('Maximum_30sec', '-', 3000*10, w, h, 'Maximum_3sec');</script></td>
+<td><script>renderPingGraphic('Maximum_3min', '-', 3000*10*6, w, h, 'Maximum_30sec');</script></td>
+<td><script>renderPingGraphic('Maximum_30min', '-', 3000*10*6*10, w, h, 'Maximum_3min');</script></td>
+</tr>
+
+<tr>
+<td><script>renderPingGraphic('Lanet_3sec', 'https://www.lanet.ua/assets/images/others/transparent.png', 3000, w, h);</script></td>
+<td><script>renderPingGraphic('Lanet_30sec', '-', 3000*10, w, h, 'Lanet_3sec');</script></td>
+<td><script>renderPingGraphic('Lanet_3min', '-', 3000*10*6, w, h, 'Lanet_30sec');</script></td>
+<td><script>renderPingGraphic('Lanet_30min', '-', 3000*10*6*10, w, h, 'Lanet_3min');</script></td>
+</tr>
+</table>
+
+</body>
+</html>
