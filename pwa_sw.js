@@ -1,6 +1,7 @@
 var cacheName = 'web-ping-pwa';
 var filesToCache = [
   '/webping',
+  '/webping/index.html',
   '/webping/images/icon-128.png',
   '/webping/images/icon-144.png',
   '/webping/images/icon-152.png',
@@ -23,7 +24,7 @@ self.addEventListener('fetch', function(e) {
   e.respondWith(
     caches.match(e.request).then(function(response) {
       console.log('request ' + e.request.url + ' matched')
-      return response;// || fetch(e.request);
+      return response; || fetch(e.request);
     }).catch(
         console.log('request ' + e.request.url + ' not matched!!!')
     )
