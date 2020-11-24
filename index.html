@@ -69,7 +69,7 @@
 		document.write('</td><td>');
 		renderPingGraphic(p[i].title + '-30min', '-', 3000*10*6*10, w, h, p[i].title + '-3min');
 		document.write('</td><td style="text-align: right; vertical-align: top;">');
-		document.write('<i class="fa fa-minus-square-o fa-lg" aria-hidden="true" onClick="del('+i+')" style="cursor:pointer;" title="Add new url for ping"></i>');
+		document.write('<i class="fa fa-minus-square-o fa-lg" aria-hidden="true" onClick="del('+i+')" style="cursor:pointer;" title="'+p[i].url+'"></i>');
 		document.write('</td></tr>');
 	}
 </script>
