@@ -2,34 +2,91 @@
 <html lang="en">
 <head>
 <TITLE>WEB-PING</TITLE>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/webping/webping.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="webping.js"></script>
+<script type="text/javascript">
+	var w=350;
+	var h=150;
 
-<script>
-var w=350;h=200;
+	function get() {
+		var p_data = localStorage.getItem('ping_list');
+		if (p_data) {
+			var p = JSON.parse(p_data);
+		} else {
+			p = [];
+		}
+		return p;
+	}
+
+	function set(i, title, url) {
+		console.log('set:' + i + ':' + title + ', ' + url);
+		var p = get();
+		p[i] = {"title":title, "url":url};
+		localStorage.setItem('ping_list', JSON.stringify(p));
+	}
+
+	function add() {
+		var p = get();
+		set(p.length, $("#title").val(), $("#url").val());
+		window.location.reload();
+	}
+
+	function del(i) {
+		var p = get();
+		console.log('del:' + i + ':' + p[i].title + ', ' + p[i].url);
+		p.splice(i);
+
+		localStorage.setItem('ping_list', JSON.stringify(p));
+		window.location.reload();
+	}
+
+	function set_default() {
+		var p = get();
+		if (p.length === 0) {
+			set(0, "Google", "https://www.google.com/favicon.ico");
+			set(1, "Facebook", "https://www.facebook.com/favicon.ico");
+			set(2, "Maximum", "https://maximuma.net/wp-content/uploads/2019/07/cropped-minloggS-1-32x32.png");
+			set(3, "Lanet", "https://www.lanet.ua/favicon.ico");
+		}
+	}
+
 </script>
 </head>
 <body>
 <table border="0">
-<tr>
-<td><script>renderPingGraphic('Google_3sec', 'https://www.google.com/favicon.ico', 3000, w, h);</script></td>
-<td><script>renderPingGraphic('Google_30sec', '-', 3000*10, w, h, 'Google_3sec');</script></td>
-<td><script>renderPingGraphic('Google_3min', '-', 3000*10*6, w, h, 'Google_30sec');</script></td>
-<td><script>renderPingGraphic('Google_30min', '-', 3000*10*6*10, w, h, 'Google_3min');</script></td>
-</tr>
-<tr>
-<td><script>renderPingGraphic('Maximum_3sec', 'https://maximuma.net/wp-content/uploads/2018/10/logofooter1.png', 3000, w, h);</script></td>
-<td><script>renderPingGraphic('Maximum_30sec', '-', 3000*10, w, h, 'Maximum_3sec');</script></td>
-<td><script>renderPingGraphic('Maximum_3min', '-', 3000*10*6, w, h, 'Maximum_30sec');</script></td>
-<td><script>renderPingGraphic('Maximum_30min', '-', 3000*10*6*10, w, h, 'Maximum_3min');</script></td>
+<script type="text/javascript">
+	set_default();
+	var p = get();
+
+	for (var i=0; i<p.length; i++) {
+		document.write('<tr><td>');
+		renderPingGraphic(p[i].title + '-3sec', p[i].url, 3000, w, h);
+		document.write('</td><td>');
+		renderPingGraphic(p[i].title + '-30sec', '-', 3000*10, w, h, p[i].title + '-3sec');
+		document.write('</td><td>');
+		renderPingGraphic(p[i].title + '-3min', '-', 3000*10*6, w, h, p[i].title + '-30sec');
+		document.write('</td><td>');
+		renderPingGraphic(p[i].title + '-30min', '-', 3000*10*6*10, w, h, p[i].title + '-3min');
+		document.write('</td><td style="text-align: right; vertical-align: top;">');
+		document.write('<i class="fa fa-minus-square-o fa-lg" aria-hidden="true" onClick="del('+i+')" style="cursor:pointer;" title="Add new url for ping"></i>');
+		document.write('</td></tr>');
+	}
+</script>
+
+<tr><td colspan="4" align="right">
+	<form>
+	<label for="title" class="msg">Title</label>
+	<input class="form-control" type="text" id="title" name="url" placeholder="title">&nbsp;&nbsp;
+	<label for="url" class="msg">Url</label>
+	<input class="form-control" type="text" id="url" name="url" placeholder="url to image" size="150">
+	</form>
+</td>
+<td align="right">
+	<i class="fa fa-plus-square-o fa-lg" aria-hidden="true" onClick="add()" style="cursor:pointer;" title="Add new url for ping"></i>
+</td>
 </tr>
 
-<tr>
-<td><script>renderPingGraphic('Lanet_3sec', 'https://www.lanet.ua/assets/images/others/transparent.png', 3000, w, h);</script></td>
-<td><script>renderPingGraphic('Lanet_30sec', '-', 3000*10, w, h, 'Lanet_3sec');</script></td>
-<td><script>renderPingGraphic('Lanet_3min', '-', 3000*10*6, w, h, 'Lanet_30sec');</script></td>
-<td><script>renderPingGraphic('Lanet_30min', '-', 3000*10*6*10, w, h, 'Lanet_3min');</script></td>
-</tr>
 </table>
 
 </body>

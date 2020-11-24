@@ -253,7 +253,7 @@ Ping.prototype.ping = function(source, callback) {
 
 	function renderPingGraphic(name, imgsrc, ping_interval, width, height, rel_name) {
 		localStorage.setItem('interval_' + name, ping_interval);
-		document.write(name + ' <span id="span_' + name + '"></span><br/>');
+		document.write(name + ' last ping: <span id="span_' + name + '"></span><br/>');
 		document.write('<canvas id="canvas_' + name + '" width="' + width + '" height="' + height + '"></canvas>');
 		var c = document.getElementById('canvas_' + name);
 		var ctx = c.getContext('2d');
