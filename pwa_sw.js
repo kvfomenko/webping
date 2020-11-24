@@ -1,6 +1,6 @@
 var cacheName = 'web-ping-pwa';
 var filesToCache = [
-  '/webping',
+  '/webping/',
   '/webping/index.html',
   '/webping/images/icon-128.png',
   '/webping/images/icon-144.png',
