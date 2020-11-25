@@ -214,9 +214,9 @@ Ping.prototype.ping = function(source, callback) {
 		ctx.stroke();
 
 		ctx.font = "10px sans-serif";
-		ctx.strokeText(vertical_scale + ' ms', width_graphic +5 +correction, 10 +correction);
-		ctx.strokeText(Math.round(vertical_scale/2) + ' ms', width_graphic +5 +correction, Math.round(height_graphic/2) +correction);
-		ctx.strokeText('0 ms', width_graphic +5 +correction, height_graphic -5 +correction);
+	    ctx.fillText(vertical_scale + ' ms', width_graphic +5 +correction, 10 +correction);
+		ctx.fillText(Math.round(vertical_scale/2) + ' ms', width_graphic +5 +correction, Math.round(height_graphic/2) +correction);
+		ctx.fillText('0 ms', width_graphic +5 +correction, height_graphic -5 +correction);
 
 		var sec_per_pixel = ping_interval/1000;
 		var sec_total = width_graphic * sec_per_pixel;
@@ -227,19 +227,19 @@ Ping.prototype.ping = function(source, callback) {
 				if (minute_i%20 === 0 
 					|| (minute_i%2 === 0 && px_per_minute >= 5)
 					|| px_per_minute >= 30) {
-					ctx.strokeText(minute_i + 'm', width_graphic +(minute_i*px_per_minute) +correction, height_graphic +10 +correction);
+					ctx.fillText(minute_i + 'm', width_graphic +(minute_i*px_per_minute) +correction, height_graphic +10 +correction);
 				}
 			}
 		} else if (px_per_hour > 10) {
 			for (var minute_i = 0; minute_i > -sec_total/60; minute_i--) {
 				if (minute_i%120 === 0) {
-					ctx.strokeText(Math.round(minute_i/60) + 'h', width_graphic +(minute_i*px_per_minute) +correction, height_graphic +10 +correction);
+					ctx.fillText(Math.round(minute_i/60) + 'h', width_graphic +(minute_i*px_per_minute) +correction, height_graphic +10 +correction);
 				}
 			}
 		} else {
 			for (var minute_i = 0; minute_i > -sec_total/60; minute_i--) {
 				if (minute_i%1440 === 0) {
-					ctx.strokeText(Math.round(minute_i/60/24) + 'd', width_graphic +(minute_i*px_per_minute) +correction, height_graphic +10 +correction);
+					ctx.fillText(Math.round(minute_i/60/24) + 'd', width_graphic +(minute_i*px_per_minute) +correction, height_graphic +10 +correction);
 				}
 			}
 		}
