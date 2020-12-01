@@ -5,4 +5,4 @@ https://kvfomenko.github.io/webping
 (PWA)
 
 ## Screenshots
-[App's screenshot](doc/screenshot_webping.png)
+[App's screenshot](https://kvfomenko.github.io/webping/doc/screenshot_webping.png)
