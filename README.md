@@ -1,3 +1,8 @@
-# webping
+# WebPing
 
-[Demo](doc/screenshot_webping.png)
+## App url
+https://kvfomenko.github.io/webping
+(PWA)
+
+## Screenshots
+[App's screenshot](doc/screenshot_webping.png)
