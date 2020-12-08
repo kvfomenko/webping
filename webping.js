@@ -15,7 +15,7 @@ var Ping = function(opt) {
 
 Ping.prototype.ping = function(source, callback) {
 	var self = this;
-	self.wasSuccess = false;
+	self.isDone = '';
 	self.img = new Image();
 	self.img.onload = onload;
 	self.img.onerror = onerror;
@@ -24,19 +24,25 @@ Ping.prototype.ping = function(source, callback) {
 	var start = new Date();
 
 	function onload(e) {
-		self.wasSuccess = true;
-		pingCheck.call(self, e);
+		if (!self.isDone) {
+			self.isDone = 'success';
+			pingCheck.call(self, e);
+		}
 	}
 
 	function onerror(e) {
-		self.wasSuccess = false;
-		pingCheck.call(self, e);
+		if (!self.isDone) {
+			self.isDone = 'error';
+			//console.error("onerror: " + JSON.stringify(e));
+			pingCheck.call(self, e);
+		}
 	}
 
-	if (self.timeout) {
-		timer = setTimeout(function() {
-		pingCheck.call(self, undefined);
-	}, self.timeout); }
+	timer = setTimeout(function() {
+		if (!self.isDone) {
+			self.isDone = 'timeout';
+			pingCheck.call(self, undefined);
+		}}, self.timeout);
 
 
 	function pingCheck() {
@@ -46,11 +52,13 @@ Ping.prototype.ping = function(source, callback) {
 		if (typeof callback === "function") {
 			// When operating in timeout mode, the timeout callback doesn't pass [event] as e.
 			// Notice [this] instead of [self], since .call() was used with context
-			if (!this.wasSuccess) {
-				if (self.logError) { console.error("error loading resource"); }
-				return callback("error", 1000);
+			if (this.isDone === 'success') {
+				return callback(null, pong);
+			} else if (this.isDone === 'error') {
+				return callback('error', 1000/*pong*/);
+			} else {
+				return callback('timeout', 1000);
 			}
-			return callback(null, pong);
 		}
 	}
 
