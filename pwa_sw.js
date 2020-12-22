@@ -21,6 +21,11 @@ self.addEventListener('install', function(e) {
 
 /* Serve cached content when offline */
 self.addEventListener('fetch', function(e) {
+  
+  if (e.request.method !== 'GET'
+      || e.request.url.indexOf('.json') >= 0
+      || e.request.url.indexOf('kvfomenko') === -1) { return; }
+  
   e.respondWith(
     caches.match(e.request).then(function(response) {
       console.log('request ' + e.request.url + ' matched')
