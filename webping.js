@@ -53,10 +53,13 @@ Ping.prototype.ping = function(source, callback) {
 			// When operating in timeout mode, the timeout callback doesn't pass [event] as e.
 			// Notice [this] instead of [self], since .call() was used with context
 			if (this.isDone === 'success') {
+				console.log('pong success :' + pong);
 				return callback(null, pong);
 			} else if (this.isDone === 'error') {
-				return callback('error', 1000/*pong*/);
+				console.log('pong error :' + pong);
+				return callback('error', 1000);
 			} else {
+				console.log('pong timeout :' + pong);
 				return callback('timeout', 1000);
 			}
 		}
@@ -165,7 +168,7 @@ Ping.prototype.ping = function(source, callback) {
 				ms_agg += p[i];
 			}
 			var ms = Math.round(ms_agg / count_i,1);
-		console.log(name + ' -> ' + ms + ' ' + ms_agg + ' ' + count_i);
+			//console.log(name + ' -> ' + ms + ' ' + ms_agg + ' ' + count_i);
 			$('#span_' + name).html(ms + 'ms');
 			savePing(name, ms);
 			drawPing(ctx, ms, width, height);
@@ -176,7 +179,7 @@ Ping.prototype.ping = function(source, callback) {
 
 			var p = new Ping();
 			p.ping(src, function(err, ms) {
-				//console.log(name + ' -> ' + ms);
+				console.log(name + ' -> ' + ms);
 				$('#span_' + name).html(ms + 'ms');
 				savePing(name, ms);
 				drawPing(ctx, ms, width, height);
