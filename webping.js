@@ -165,7 +165,7 @@ Ping.prototype.ping = function(source, callback) {
 				ms_agg += p[i];
 			}
 			var ms = Math.round(ms_agg / count_i,1);
-			//console.log(name + ' -> ' + ms);
+		console.log(name + ' -> ' + ms + ' ' + ms_agg + ' ' + count_i);
 			$('#span_' + name).html(ms + 'ms');
 			savePing(name, ms);
 			drawPing(ctx, ms, width, height);
