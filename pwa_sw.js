@@ -1,13 +1,13 @@
 var cacheName = 'web-ping-pwa';
 var filesToCache = [
-  '/web_battery/',
-  '/web_battery/index.html',
-  '/web_battery/images/icon-128.png',
-  '/web_battery/images/icon-144.png',
-  '/web_battery/images/icon-152.png',
-  '/web_battery/images/icon-192.png',
-  '/web_battery/images/icon-256.png',
-  '/web_battery/images/icon-512.png'
+  '/webping/',
+  '/webping/index.html',
+  '/webping/images/icon-128.png',
+  '/webping/images/icon-144.png',
+  '/webping/images/icon-152.png',
+  '/webping/images/icon-192.png',
+  '/webping/images/icon-256.png',
+  '/webping/images/icon-512.png'
 ];
 
 /* Start the service worker and cache all of the app's content */
